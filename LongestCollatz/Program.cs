@@ -26,6 +26,50 @@ namespace LongestCollatz
                 NOTE : Once the chain starts the terms are allowed to go above one thousand.*/
 
 
+            //Looking for starting number
+            //Under 1,000
+            //That produces the longest chain
+            //Terms are allowed to go over 1000 once chain starts
+            //This is for positive integers
+            // If number is even -> number / 2
+            //If number is odd -> 3 * number + 1
+            //unsure if List will be needed or if I can just handle math/logic in a for loop with some if/whiles
+
+            int lengthOfSequence = 0; //starting sequence length tracker at 0
+            int startNumber = 0; //starting with startNumber 0
+            int countTracker = 0; //starting tracker for count at 0
+
+            //loop over all numbers under 1000, run the sequence while startNumber is not 1, count length of sequence
+            for (int i = 2; i < 1000; i++)
+            {
+                int lengthTracker = 1;
+                startNumber = i; //if chain value is 1/lands at 1, end here until remaining code below
+
+                while (startNumber != 1) //if value is not 1, do the if/else below
+                {
+                    if (startNumber % 2 == 0)
+                    {
+                        startNumber /= 2; //for even numbers
+                    }//end if
+                    else
+                    {
+                        startNumber = startNumber * 3 + 1; //for odd numbers
+                    }//end else
+                    lengthTracker++;//counter for length of sequence/chain
+                }//end while
+
+                if (lengthTracker > lengthOfSequence)//looks at previous value vs new value
+                {
+                    lengthOfSequence = lengthTracker;//holds new value 
+                    countTracker = i;//holds the iteration the for loop was on.
+                }//end if
+
+            }//end for
+
+            Console.WriteLine($"The largest chain producing starting number under 1000 is {countTracker}. The chain length for {countTracker} is {lengthOfSequence - 1}");
+
+            //Unsure why lengthOfSequence is showing one number higher than what the actual answer is. 871 has 178 steps, and without the minus 1 in the formatting above, console displays 179.
+
 
 
         }//end main
